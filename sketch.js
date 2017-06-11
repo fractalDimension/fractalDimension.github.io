@@ -6,6 +6,8 @@ var row_number = 16;
 var difficulty = 5;
 // min moves to win
 var shuffle_amount = 3;
+var max_start_height = 3;
+var min_start_height = 1;
 
 // line dimension an spacing
 var line_width_ratio = 0.1;
@@ -165,20 +167,19 @@ function initializeBoard( difficulty_value ) {
 
 function randomHeight () {
   // plusOrMinus = Math.random() < 0.5 ? -1 : 1
-  var rand_unsigned_height = Math.floor(Math.random() * (3)) + 1;
+  var rand_unsigned_height = Math.floor(Math.random()*(max_start_height-min_start_height+1)+min_start_height)
   var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
   return rand_unsigned_height * plusOrMinus;
 }
 
 function colorFromHeight ( signed_height ) {
-  var max_distance = row_number/2;
-  var steps = 1/max_distance;
+  var steps = 1/(max_start_height - min_start_height);
   var abs_height = abs(signed_height);
-  var inc = steps*abs_height;
+  var inc = steps*(abs_height - min_start_height);
   // TODO find a way to move the values to the top of the file
-  var start_color = color(218, 165, 32);
-  var end_color = color(72, 61, 139);
-  return lerpColor(start_color, end_color, steps*abs_height);
+  var start_color = color(255, 58, 51);
+  var end_color = color(255, 247, 51);
+  return lerpColor(start_color, end_color, inc);
 }
 
 function keyPressed() {
