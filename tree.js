@@ -83,6 +83,9 @@ function Tree() {
 		} else {
 			this.grow_cycles_since_last_grown = 0;
 		}
+		if ( tree.grow_cycles_since_last_grown > 10 ) {
+			noLoop();
+		}
 	}
 	
 	this.show = function() {
