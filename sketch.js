@@ -25,12 +25,24 @@ function draw() {
 }
 
 function mouseClicked() {
-	console.log('click');
   if ( !tree.initialized ) {
-		tree.initialized = true;
-		tree.initialize( mouseX, mouseY );
-		loop();
-	} else {
+    tree.initialized = true;
+    tree.initialize( mouseX, mouseY );
+    loop();
+  } else {
+    tree = new Tree();
+    background(51);
+    tree.show();
+  }
+}
+
+// for mobile
+function touchStarted() {
+  if ( !tree.initialized ) {
+    tree.initialized = true;
+    tree.initialize( mouseX, mouseY );
+    loop();
+  } else {
     tree = new Tree();
     background(51);
     tree.show();
